@@ -65,7 +65,7 @@
 
   // TODO: make into loader
   var loaded = 0;
-  var neededToLoad = 1;
+  var neededToLoad = 2;
 
   var shaders;
 
@@ -82,7 +82,14 @@
 
   var audioController = new AudioController();
   audioController.mute.gain.value = 0;
-  //var stream = new Stream(  'audio/huldra.mp3',audioController  );
+  var stream = new Stream(  'audio/huldra.mp3',audioController  );
+
+   var userAudio = new UserAudio( audioController );
+  userAudio.onStreamCreated = function(){
+
+    onLoad();
+
+  }
 
   var G_UNIFORMS = {
 

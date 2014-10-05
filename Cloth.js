@@ -1,7 +1,7 @@
 function Cloth( title , mesh , extraParams ){
 
   var title = title || 'HELLO';
-  var mesh = mesh || new THREE.Mesh( new THREE.PlaneGeometry( 10 , 10 , 100 , 100) );
+  var mesh = mesh || new THREE.Mesh( new THREE.PlaneGeometry( 10 , 10 , 200 , 200) );
 
   var geometry = new THREE.Geometry();
 
@@ -51,16 +51,18 @@ function Cloth( title , mesh , extraParams ){
       springLength:       { type:"f" , value: .09  , constraints:[ .001 ,1 ] },
       springMultiplier:   { type:"f" , value: 500. , constraints:[ .001 ,100 ] },
       maxVel:             { type:"f" , value: .001   , constraints:[ .00001 , 1. ] },
-      t_audio:            G_UNIFORMS.t_audio,
       sample:             G_UNIFORMS.sample,
-      time:             G_UNIFORMS.time,
+      time:               G_UNIFORMS.time,
 
 
     },
 
     body:{
           
+      t_audio:            G_UNIFORMS.t_audio,
       lightPos:{type:"v3" , value: new THREE.Vector3( 10 , 1 , 1 )},
+      audioDisplacement: { type:"f" , value: 0   , constraints:[ 0 , .3 ] },
+      
     },
 
   }

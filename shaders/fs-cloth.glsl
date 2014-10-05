@@ -13,7 +13,7 @@ varying vec3 vMNorm;
 varying vec3 vCamVec;
 varying vec3 vMPos;
 varying vec2 vUv;
-
+varying vec4 vAudio;
 
 void main(){
 
@@ -39,10 +39,11 @@ void main(){
 
   //vec4 c = mix( l_refr , l_refl , length( aC ) * (1. -m*m) / 2. );
  
-
+  float lu = abs( dot( vCamVec , vNorm ));
+  vec4 aC = texture2D( t_audio , vec2( lu , 0. ));
  // vec4 c = mix( r , b , (1. -  m  ));
   //gl_FragColor = vec4( abs( vMNorm ) , 1. );//c + aC;// c * aC * custom3;
-  gl_FragColor = vec4( abs( vMNorm ) , 1. ); //* vec4(vUv.x , .1 , vUv.y , 1. );//c + aC;// c * aC * custom3;
+  gl_FragColor = aC *(1.-lu*lu*lu); //* vec4(vUv.x , .1 , vUv.y , 1. );//c + aC;// c * aC * custom3;
 
 
   

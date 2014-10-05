@@ -150,7 +150,7 @@ void main(){
 
   vel = min( length(maxVel) , length(vel) )*normalize(vel) / 1.1;
   // Verlet integration 
-  p = pos.xyz + (pos.xyz - oPos.xyz) * .999 + min( .01 , dT * dT ) * f / sample;
+  p = pos.xyz + (pos.xyz - oPos.xyz) * (.99 + .01*dampening) + min( .01 , dT * dT ) * f / sample;
 
   vec3 difP = p - pos.xyz;
 
