@@ -16,6 +16,7 @@ uniform float sample;
 
 uniform vec3 windDirection;
 uniform float windSpeed;
+uniform float windDepth;
 
 
 const float size  = @SIZE;
@@ -132,7 +133,7 @@ void main(){
 
 //  float windMultiplier = (abs(sin( time )) + abs(cos( time * .026933)))*.5 + 1. ;
 
-  f += (windDirection +vec3( 0. , 0. , 1. * windMultiplier)) * windSpeed;
+  f += (windDirection +vec3( 0. , 0. , windDepth * windMultiplier)) * windSpeed;
   //vel *= (length( a )*length( a )*length( a ) )+.5;
  /* vel = (newP + (windDirection * windSpeed * (snoise( p * .01 +offset)*.8+1.))) *min( .1 , dT) ;
   if( length(vel) > maxVel){

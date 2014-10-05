@@ -45,10 +45,11 @@ function Cloth( title , mesh , extraParams ){
 
     soul:{
       
-      windSpeed:     { type:"f" , value: .0005  , constraints:[ 0 , 1] },
+      windSpeed:     { type:"f" , value: .05  , constraints:[ 0 , .1] },
+      windDepth:     { type:"f" , value: .1  , constraints:[ 0 , 1] },
       windDirection:      { type:"v3" ,value: dir  },
       dampening:          { type:"f" , value: .95  , constraints:[ .8 , .9999 ] },
-      springLength:       { type:"f" , value: .09  , constraints:[ .001 ,1 ] },
+      springLength:       { type:"f" , value: .09  , constraints:[ .0001 ,.1 ] },
       springMultiplier:   { type:"f" , value: 500. , constraints:[ .001 ,100 ] },
       maxVel:             { type:"f" , value: .001   , constraints:[ .00001 , 1. ] },
       noiseSize:          { type:"f" , value: .2   , constraints:[ .00001 , .1 ] },

@@ -43,7 +43,8 @@ void main(){
   vec4 aC = texture2D( t_audio , vec2( lu , 0. ));
  // vec4 c = mix( r , b , (1. -  m  ));
   //gl_FragColor = vec4( abs( vMNorm ) , 1. );//c + aC;// c * aC * custom3;
-  gl_FragColor = aC *(1.-lu*lu*lu); //* vec4(vUv.x , .1 , vUv.y , 1. );//c + aC;// c * aC * custom3;
+  //gl_FragColor = aC *(1.-lu*lu*lu); //* vec4(vUv.x , .1 , vUv.y , 1. );//c + aC;// c * aC * custom3;
+  gl_FragColor =vec4( 1. ) *(1.-lu*lu*lu); //* vec4(vUv.x , .1 , vUv.y , 1. );//c + aC;// c * aC * custom3;
 
 
   
