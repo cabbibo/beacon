@@ -156,11 +156,11 @@
     cloth.toggle();
     cloth.debug();
 
-   /* for( var i = 0; i < 5; i++ ){
+    for( var i = 0; i < 11; i++ ){
     var c2 = cloth.body.clone();
-    c2.rotation.z = Math.PI * 2 * ( (i+1) / 6);
+    c2.rotation.z = Math.PI * 2 * ( (i+1) / 12);
     scene.add( c2 );
-    }*/
+    }
 
   }
 
@@ -175,7 +175,7 @@
       G_UNIFORMS.sample.value = i+1;
       cloth.update();
     
-    }
+   }
 
 
     audioController.update();

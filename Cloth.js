@@ -1,7 +1,7 @@
 function Cloth( title , mesh , extraParams ){
 
   var title = title || 'HELLO';
-  var mesh = mesh || new THREE.Mesh( new THREE.PlaneGeometry( 10 , 10 , 200 , 200) );
+  var mesh = mesh || new THREE.Mesh( new THREE.PlaneGeometry( 10 , 10 , 100 , 100) );
 
   var geometry = new THREE.Geometry();
 
@@ -52,7 +52,7 @@ function Cloth( title , mesh , extraParams ){
       springLength:       { type:"f" , value: .09  , constraints:[ .0001 ,.1 ] },
       springMultiplier:   { type:"f" , value: 500. , constraints:[ .001 ,100 ] },
       maxVel:             { type:"f" , value: .001   , constraints:[ .00001 , 1. ] },
-      noiseSize:          { type:"f" , value: .2   , constraints:[ .00001 , .1 ] },
+      noiseSize:          { type:"f" , value: .2   , constraints:[ .00001 , .3 ] },
       sample:             G_UNIFORMS.sample,
       time:               G_UNIFORMS.time,
 
