@@ -11,7 +11,7 @@ uniform float maxVel;
 uniform float springLength;
 uniform float dampening;
 uniform float springMultiplier;
-
+uniform float noiseSize;
 uniform float sample;
 
 uniform vec3 windDirection;
@@ -128,7 +128,7 @@ void main(){
 
   vec3 offset = vec3( sin( time * .0056012 ) , cos( time * .026933) , sin( time * .15248));
 
-  float windMultiplier = snoise( pos.xyz * .1 + offset );
+  float windMultiplier = snoise( pos.xyz * noiseSize + offset );
 
 //  float windMultiplier = (abs(sin( time )) + abs(cos( time * .026933)))*.5 + 1. ;
 
@@ -159,7 +159,7 @@ void main(){
     p = pos.xyz + normalize( difP ) * maxVel * .5;
   }
 
-  if( vUv.x < iSize || vUv.y < iSize || vUv.x > 1.- iSize ||vUv.y > 1. -iSize   ){
+  if( vUv.x < iSize ){//|| vUv.y < iSize || vUv.x > 1.- iSize ||vUv.y > 1. -iSize   ){
     p = og.xyz;
   }
 
