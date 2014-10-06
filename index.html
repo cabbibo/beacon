@@ -65,7 +65,7 @@
 
   // TODO: make into loader
   var loaded = 0;
-  var neededToLoad = 1;
+  var neededToLoad = 2;
 
   var shaders;
 
@@ -82,14 +82,14 @@
 
   var audioController = new AudioController();
   audioController.mute.gain.value = 0;
-  var stream = new Stream(  'audio/huldra.mp3',audioController  );
+  //var stream = new Stream(  'audio/huldra.mp3',audioController  );
 
-  /* var userAudio = new UserAudio( audioController );
+ var userAudio = new UserAudio( audioController );
   userAudio.onStreamCreated = function(){
 
     onLoad();
 
-  }*/
+  }
 
   var G_UNIFORMS = {
 
@@ -156,11 +156,32 @@
     cloth.toggle();
     cloth.debug();
 
-    for( var i = 0; i < 11; i++ ){
+
+    var g = new THREE.IcosahedronGeometry( 1 , 3 );
+    var m = new THREE.MeshNormalMaterial();
+
+    var me = new THREE.Mesh( g , m );
+    scene.add( me );
+
+    var me = new THREE.Mesh( g , m );
+    me.position.x = -3;
+    me.position.y = -2;
+    me.position.z = 0;
+    scene.add( me );
+
+    var me = new THREE.Mesh( g , m );
+    me.position.x = 3.;
+    me.position.y = 2;
+    me.position.z = 0;
+    scene.add( me );
+
+  
+    //cloth.body.position.x = -5;
+   /* for( var i = 0; i < 11; i++ ){
     var c2 = cloth.body.clone();
     c2.rotation.z = Math.PI * 2 * ( (i+1) / 12);
     scene.add( c2 );
-    }
+    }*/
 
   }
 

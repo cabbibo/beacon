@@ -1,7 +1,7 @@
 function Cloth( title , mesh , extraParams ){
 
   var title = title || 'HELLO';
-  var mesh = mesh || new THREE.Mesh( new THREE.PlaneGeometry( 10 , 10 , 100 , 100) );
+  var mesh = mesh || new THREE.Mesh( new THREE.PlaneGeometry( 16, 10 , 200 , 200) );
 
   var geometry = new THREE.Geometry();
 
@@ -29,8 +29,15 @@ function Cloth( title , mesh , extraParams ){
       vs = shaders.setValue( vs , 'ISIZE' , iSize+"" );
   var dir =new THREE.Vector3( .1 , 0 , 0 )
 
+  //var flagTexture = THREE.ImageUtils.loadTexture( 'img/logoFlagSquare.png' );
+  var normalTexture = THREE.ImageUtils.loadTexture( 'img/normals/water.png' );
+  var flagTexture = THREE.ImageUtils.loadTexture( 'img/bnw.png' );
+  var iriTexture = THREE.ImageUtils.loadTexture( 'img/iri/gold.png' );
   //dir.normalize();
-        
+  
+  normalTexture.wrapS = THREE.RepeatWrapping;
+  normalTexture.wrapT = THREE.RepeatWrapping;
+
   var params =  {
 
     vs: vs,
@@ -45,17 +52,19 @@ function Cloth( title , mesh , extraParams ){
 
     soul:{
       
-      windSpeed:     { type:"f" , value: .05  , constraints:[ 0 , .1] },
-      windDepth:     { type:"f" , value: .1  , constraints:[ 0 , 1] },
+      windSpeed:     { type:"f" , value: .06  , constraints:[ 0 , 2.1] },
+      windDepth:     { type:"f" , value: .3  , constraints:[ 0 , 1] },
+      windHeight:     { type:"f" , value: .3  , constraints:[ 0 , 1] },
       windDirection:      { type:"v3" ,value: dir  },
-      dampening:          { type:"f" , value: .95  , constraints:[ .8 , .9999 ] },
-      springLength:       { type:"f" , value: .09  , constraints:[ .0001 ,.1 ] },
-      springMultiplier:   { type:"f" , value: 500. , constraints:[ .001 ,100 ] },
-      maxVel:             { type:"f" , value: .001   , constraints:[ .00001 , 1. ] },
-      noiseSize:          { type:"f" , value: .2   , constraints:[ .00001 , .3 ] },
+      dampening:          { type:"f" , value: .9  , constraints:[ .0 , .9999 ] },
+      springLength:       { type:"f" , value: .05  , constraints:[ .0001 ,.1 ] },
+      springMultiplier:   { type:"f" , value: 10000. , constraints:[ .001 ,10000 ] },
+      maxVel:             { type:"f" , value: .001   , constraints:[ .00001 , .01 ] },
+      noiseSize:          { type:"f" , value: .3   , constraints:[ .00001 , 1. ] },
       sample:             G_UNIFORMS.sample,
       time:               G_UNIFORMS.time,
 
+      t_audio:            G_UNIFORMS.t_audio,
 
     },
 
@@ -64,7 +73,9 @@ function Cloth( title , mesh , extraParams ){
       t_audio:            G_UNIFORMS.t_audio,
       lightPos:{type:"v3" , value: new THREE.Vector3( 10 , 1 , 1 )},
       audioDisplacement: { type:"f" , value: 0   , constraints:[ 0 , .3 ] },
-      
+      t_flag: { type:"t" , value: flagTexture }, 
+      t_normal: { type:"t" , value: normalTexture }, 
+      t_iri: { type:"t" , value: iriTexture } 
     },
 
   }

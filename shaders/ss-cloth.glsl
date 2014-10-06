@@ -17,6 +17,7 @@ uniform float sample;
 uniform vec3 windDirection;
 uniform float windSpeed;
 uniform float windDepth;
+uniform float windHeight;
 
 
 const float size  = @SIZE;
@@ -120,20 +121,52 @@ void main(){
 
 
   f /= 20.;
-  
+ 
+  vec3 rF = vec3( 0. );
 
+  vec3 P = p - vec3( 0. );
+
+  if( length( P ) < 1.5 ){
+
+    rF = (1.5 - length( P )  ) *  normalize( P ) / length( P );
+
+  }
+
+  P = p - vec3( 3. , 2. , 0. );
+
+  if( length( P ) < 1.5 ){
+
+    rF = (1.5 - length( P )  ) *  normalize( P ) / length( P );
+
+  }
+
+  P = p - vec3( -3. , -2. , 0. );
+
+
+  if( length( P ) < 1.5 ){
+
+    rF = (1.5 - length( P )  ) *  normalize( P ) / length( P );
+
+  }
+
+
+  f += rF;
  // f -= pos.xyz * pos.xyz *pos.xyz * .1;
 
  // vel +=  f*min( .1 , dT);
  //  vel *= dampening;
 
-  vec3 offset = vec3( sin( time * .0056012 ) , cos( time * .026933) , sin( time * .15248));
+  vec3 offset = vec3( sin( time * 49.0056012 ) , cos( time * 19.026933) , sin( time * .15248));
 
   float windMultiplier = snoise( pos.xyz * noiseSize + offset );
 
+  offset = vec3( sin( time * .56012 ) , cos( time * 1.16933) , sin( time * .15248));
+
+  float windHMultiplier = snoise( pos.xyz * noiseSize + offset );
+
 //  float windMultiplier = (abs(sin( time )) + abs(cos( time * .026933)))*.5 + 1. ;
 
-  f += (windDirection +vec3( 0. , 0. , windDepth * windMultiplier)) * windSpeed;
+  f += (windDirection +vec3( 0. , windHeight * windHMultiplier , windDepth * windMultiplier)) * windSpeed;
   //vel *= (length( a )*length( a )*length( a ) )+.5;
  /* vel = (newP + (windDirection * windSpeed * (snoise( p * .01 +offset)*.8+1.))) *min( .1 , dT) ;
   if( length(vel) > maxVel){
@@ -151,16 +184,17 @@ void main(){
 
   vel = min( length(maxVel) , length(vel) )*normalize(vel) / 1.1;
   // Verlet integration 
-  p = pos.xyz + (pos.xyz - oPos.xyz) * (.99 + .01*dampening) + min( .01 , dT * dT ) * f / sample;
+  vec4 a = texture2D( t_audio, vec2( vUv.x , 0. ) );
+  p = pos.xyz + (pos.xyz - oPos.xyz) * (.99 + .01*dampening) +min( .01 , dT * dT ) * f / sample;
 
   vec3 difP = p - pos.xyz;
 
-  if( length( difP ) > maxVel ){
 
-    p = pos.xyz + normalize( difP ) * maxVel * .5;
+  if( length( difP ) > maxVel ){
+    p = pos.xyz + normalize( difP ) * maxVel * .9;
   }
 
-  if( vUv.x < iSize ){//|| vUv.y < iSize || vUv.x > 1.- iSize ||vUv.y > 1. -iSize   ){
+  if( vUv.x < iSize  ){//|| vUv.y < iSize || vUv.x > 1.- iSize ||vUv.y > 1. -iSize   ){
     p = og.xyz;
   }
 
