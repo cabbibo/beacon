@@ -35,7 +35,7 @@ function Cloth( title , mesh , extraParams ){
  // var flagTexture = THREE.ImageUtils.loadTexture( 'img/nvsText.png' );
  //
   //var flagTexture = THREE.ImageUtils.loadTexture( 'img/aley.png' );
-  var flagTexture = THREE.ImageUtils.loadTexture( 'img/osod.png' );
+  var flagTexture = THREE.ImageUtils.loadTexture( 'img/nyan_250.png' );
   var iriTexture = THREE.ImageUtils.loadTexture( 'img/iri/orangeTurq.png' );
   //dir.normalize();
   
