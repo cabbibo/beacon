@@ -24,16 +24,16 @@ varying vec2 vUv;
 varying vec4 vAudio;
 
 const float smoothing = 1. / 32.;
-const float texScale = 5.;
-const float normalScale = .04;
+uniform float texScale ;
+uniform float normalScale;
 void main(){
 
-   vec2 tLookup = vec2( vUv );
+  vec2 tLookup = vec2( vUv );
   /*tLookup *= 1. / textureScale;
   tLookup -= (1. / textureScale)/2.;// / 2.;
   tLookup += textureScale;// / 2.;*/
-
-  //vec4 title = texture2D( t_flag , tLookup );
+  
+  vec4 flag = texture2D( t_flag , tLookup );
 
   //float distance = 1.-title.r;
   //float lum = smoothstep( 0.6 - smoothing , 0.6 + smoothing , distance );
@@ -55,6 +55,7 @@ void main(){
 
  
   vec3 mapN = texture2D( t_normal,vUv*texScale+offset).xyz * 2.0 - 1.0;
+  mapN = texture2D( t_normal,vUv*texScale*.7314+offset).xyz * 2.0 - 1.0;
 
 
   mapN.xy = normalScale * (mapN.xy);// + newNorm);
@@ -94,8 +95,10 @@ void main(){
 
   //vec4 c = mix( l_refr , l_refl , length( aC ) * (1. -m*m) / 2. );
  
-  float lu = max( 0. , dot( vCamVec , vMNorm ));
- // vec4 aC = texture2D( t_audio , vec2( lu , 0. ));
+  //float lu = max( 0. , dot( vCamVec , vMNorm ));
+  float lu = abs(dot( vCamVec , vMNorm ));
+  float luf = abs(dot( vCamVec , fNorm ));
+  vec4 aC = texture2D( t_audio , vec2( luf , 0. ));
  // vec4 c = mix( r , b , (1. -  m  ));
   //gl_FragColor = vec4( abs( vMNorm ) , 1. );//c + aC;// c * aC * custom3;
   //gl_FragColor = aC *(1.-lu*lu*lu); //* vec4(vUv.x , .1 , vUv.y , 1. );//c + aC;// c * aC * custom3;
@@ -104,7 +107,8 @@ void main(){
   
   //vec4 flag = texture2D( t_flag , vUv );
  // gl_FragColor =vec4( vec3(1.), 1. ) * lu * lu * lu; //* vec4(vUv.x , .1 , vUv.y , 1. );//c + aC;// c * aC * custom3;
-  gl_FragColor =vec4( vec3( 1. ), 1. ) * lu * lu * lu; //* vec4(vUv.x , .1 , vUv.y , 1. );//c + aC;// c * aC * custom3;
+  //gl_FragColor = aC * vec4( iri + vec3( 1.-flag.r), 1. ) * (1. - lu * lu * lu ); //* vec4(vUv.x , .1 , vUv.y , 1. );//c + aC;// c * aC * custom3;
+  gl_FragColor = aC * vec4( iri* (abs(vMNorm)+vec3(.5)) + vec3( 1.-flag.r), 1. ) * (1. - lu * lu * lu ); //* vec4(vUv.x , .1 , vUv.y , 1. );//c + aC;// c * aC * custom3;
 
 
   

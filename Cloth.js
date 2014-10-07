@@ -1,7 +1,7 @@
 function Cloth( title , mesh , extraParams ){
 
   var title = title || 'HELLO';
-  var mesh = mesh || new THREE.Mesh( new THREE.PlaneGeometry( 16, 10 , 200 , 200) );
+  var mesh = mesh || new THREE.Mesh( new THREE.PlaneGeometry( 10, 10 , 200 , 200) );
 
   var geometry = new THREE.Geometry();
 
@@ -27,12 +27,16 @@ function Cloth( title , mesh , extraParams ){
   var vs = shaders.setValue( shaders.vertexShaders.cloth , 'SIZE'  , vSize+"." );
       vs = shaders.setValue( vs , 'HSIZE' , hSize+"" );
       vs = shaders.setValue( vs , 'ISIZE' , iSize+"" );
-  var dir =new THREE.Vector3( .1 , 0 , 0 )
+  var dir =new THREE.Vector3( 0. , 0 , -.1 )
 
   //var flagTexture = THREE.ImageUtils.loadTexture( 'img/logoFlagSquare.png' );
-  var normalTexture = THREE.ImageUtils.loadTexture( 'img/normals/water.png' );
-  var flagTexture = THREE.ImageUtils.loadTexture( 'img/bnw.png' );
-  var iriTexture = THREE.ImageUtils.loadTexture( 'img/iri/gold.png' );
+  //var normalTexture = THREE.ImageUtils.loadTexture( 'img/normals/water.png' );
+  var normalTexture = THREE.ImageUtils.loadTexture( 'img/normals/moss_normal_map.jpg' );
+ // var flagTexture = THREE.ImageUtils.loadTexture( 'img/nvsText.png' );
+ //
+  //var flagTexture = THREE.ImageUtils.loadTexture( 'img/aley.png' );
+  var flagTexture = THREE.ImageUtils.loadTexture( 'img/osod.png' );
+  var iriTexture = THREE.ImageUtils.loadTexture( 'img/iri/orangeTurq.png' );
   //dir.normalize();
   
   normalTexture.wrapS = THREE.RepeatWrapping;
@@ -59,10 +63,12 @@ function Cloth( title , mesh , extraParams ){
       dampening:          { type:"f" , value: .9  , constraints:[ .0 , .9999 ] },
       springLength:       { type:"f" , value: .05  , constraints:[ .0001 ,.1 ] },
       springMultiplier:   { type:"f" , value: 10000. , constraints:[ .001 ,10000 ] },
+      returnMultiplier:   { type:"f" , value: 10. , constraints:[ .001 ,20 ] },
       maxVel:             { type:"f" , value: .001   , constraints:[ .00001 , .01 ] },
       noiseSize:          { type:"f" , value: .3   , constraints:[ .00001 , 1. ] },
       sample:             G_UNIFORMS.sample,
       time:               G_UNIFORMS.time,
+      t_flag: { type:"t" , value: flagTexture }, 
 
       t_audio:            G_UNIFORMS.t_audio,
 
@@ -73,6 +79,8 @@ function Cloth( title , mesh , extraParams ){
       t_audio:            G_UNIFORMS.t_audio,
       lightPos:{type:"v3" , value: new THREE.Vector3( 10 , 1 , 1 )},
       audioDisplacement: { type:"f" , value: 0   , constraints:[ 0 , .3 ] },
+      texScale: { type:"f" , value: 10   , constraints:[ 0 , 100 ] },
+      normalScale: { type:"f" , value: 0.4   , constraints:[ 0 , 3. ] },
       t_flag: { type:"t" , value: flagTexture }, 
       t_normal: { type:"t" , value: normalTexture }, 
       t_iri: { type:"t" , value: iriTexture } 

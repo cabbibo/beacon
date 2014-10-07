@@ -2,6 +2,7 @@ uniform sampler2D t_oPos;
 uniform sampler2D t_pos;
 uniform sampler2D t_og;
 uniform sampler2D t_audio;
+uniform sampler2D t_flag;
 
 
 uniform float dT;
@@ -18,6 +19,8 @@ uniform vec3 windDirection;
 uniform float windSpeed;
 uniform float windDepth;
 uniform float windHeight;
+
+uniform float returnMultiplier;
 
 
 const float size  = @SIZE;
@@ -122,7 +125,7 @@ void main(){
 
   f /= 20.;
  
-  vec3 rF = vec3( 0. );
+/*  vec3 rF = vec3( 0. );
 
   vec3 P = p - vec3( 0. );
 
@@ -150,7 +153,7 @@ void main(){
   }
 
 
-  f += rF;
+  f += rF;*/
  // f -= pos.xyz * pos.xyz *pos.xyz * .1;
 
  // vel +=  f*min( .1 , dT);
@@ -175,6 +178,15 @@ void main(){
 
   }*/
 
+  vec4 flag = texture2D( t_flag , vUv );
+
+  //if( flag.r < .5 ){
+
+    f-= returnMultiplier*(p - og.xyz) *( 1. - flag.r);
+
+  //}
+
+
  // p += 6000. * normalize( newP) * ( length( newP ) * length( newP ) * length( newP ));
 
  //+= windDirection * windSpeed * .0001 * windMultiplier / sample;
@@ -189,15 +201,15 @@ void main(){
 
   vec3 difP = p - pos.xyz;
 
-
   if( length( difP ) > maxVel ){
     p = pos.xyz + normalize( difP ) * maxVel * .9;
   }
 
-  if( vUv.x < iSize  ){//|| vUv.y < iSize || vUv.x > 1.- iSize ||vUv.y > 1. -iSize   ){
+ /* if( vUv.x < iSize  ){//|| vUv.y < iSize || vUv.x > 1.- iSize ||vUv.y > 1. -iSize   ){
     p = og.xyz;
-  }
+  }*/
 
+ 
 
   //gl_FragColor = vec4( og.xyz + sin( timer ) * 1.* vec3( vUv.x , vUv.y , 0. ), 1.  );
   gl_FragColor = vec4( p , life );
