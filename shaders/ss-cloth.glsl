@@ -50,8 +50,9 @@ void main(){
 
     vec3 p1 = texture2D( t_pos , vec2( vUv.x - iSize , vUv.y )).xyz;
     vec3 nP = springForce(  p , p1 , sl );
-    f += springMultiplier *  normalize( nP )  * pow( length( nP ) ,  power );
-  
+    if( length( nP ) > .001 ){
+      f += springMultiplier *  normalize( nP )  * pow( length( nP ) , power );
+    }
 
  
   }
@@ -60,7 +61,9 @@ void main(){
 
     vec3 p1 = texture2D( t_pos , vec2( vUv.x + iSize , vUv.y )).xyz;
     vec3 nP = springForce(  p , p1 , sl );
-    f += springMultiplier *  normalize( nP )  * pow( length( nP ) , power );
+    if( length( nP ) > .001 ){
+      f += springMultiplier *  normalize( nP )  * pow( length( nP ) , power );
+    }
   
 
   
@@ -70,8 +73,9 @@ void main(){
 
     vec3 p1 = texture2D( t_pos , vec2( vUv.x , vUv.y - iSize)).xyz;
     vec3 nP = springForce(  p , p1 , sl );
-    f += springMultiplier *  normalize( nP )  * pow( length( nP ) ,  power );
-  
+    if( length( nP ) > .001 ){
+      f += springMultiplier *  normalize( nP )  * pow( length( nP ) , power );
+    }
   
   }
 
@@ -79,22 +83,28 @@ void main(){
 
     vec3 p1 = texture2D( t_pos , vec2( vUv.x , vUv.y + iSize)).xyz;
     vec3 nP = springForce(  p , p1 , sl );
-    f += springMultiplier *  normalize( nP )  * pow( length( nP ) ,  power );
- 
+    if( length( nP ) > .001 ){
+      f += springMultiplier *  normalize( nP )  * pow( length( nP ) , power );
+    }
   }
 
   if( vUv.y < 1. - iSize && vUv.x < 1. - iSize ){
 
     vec3 p1 = texture2D( t_pos , vec2( vUv.x + iSize , vUv.y + iSize)).xyz;
     vec3 nP = springForce(  p , p1 , pow( 2. * sl*sl , .5 )  );
-    f += springMultiplier *  normalize( nP ) * pow( length( nP ) ,  power);
+    if( length( nP ) > .001 ){
+      f += springMultiplier *  normalize( nP )  * pow( length( nP ) , power );
+    }
   }
 
   if( vUv.y > iSize && vUv.x < 1. - iSize ){
 
     vec3 p1 = texture2D( t_pos , vec2( vUv.x + iSize , vUv.y - iSize)).xyz;
     vec3 nP = springForce(  p , p1 , pow( 2. * sl*sl , .5 )  );
-    f += springMultiplier *  normalize( nP ) * pow( length( nP ) ,  power );
+    if( length( nP ) > .001 ){
+      f += springMultiplier *  normalize( nP )  * pow( length( nP ) , power );
+    }
+
 
   }
 
@@ -102,7 +112,10 @@ void main(){
 
     vec3 p1 = texture2D( t_pos , vec2( vUv.x - iSize , vUv.y - iSize)).xyz;
     vec3 nP = springForce(  p , p1 , pow( 2. * sl*sl , .5 )  );
-    f += springMultiplier *  normalize( nP )  * pow( length( nP ) ,  power ); 
+    if( length( nP ) > .001 ){
+      f += springMultiplier *  normalize( nP )  * pow( length( nP ) , power );
+    }
+ 
   }
   
   if( vUv.y < 1. - iSize && vUv.x > iSize ){
@@ -110,7 +123,10 @@ void main(){
     vec3 p1 = texture2D( t_pos , vec2( vUv.x - iSize , vUv.y + iSize)).xyz;
 
     vec3 nP = springForce(  p , p1 , pow( 2. * sl*sl , .5 )  );
-    f += springMultiplier *  normalize( nP ) * pow( length( nP ) , power );
+    if( length( nP ) > .001 ){
+      f += springMultiplier *  normalize( nP )  * pow( length( nP ) , power );
+    }
+
 
   }
 
@@ -156,7 +172,7 @@ void main(){
 
   if( length( difP ) > maxVel ){
 
-    p = pos.xyz + normalize( difP ) * maxVel * .5;
+    p = pos.xyz + normalize( difP ) * maxVel * .9;
   }
 
   if( vUv.x < iSize || vUv.y < iSize || vUv.x > 1.- iSize ||vUv.y > 1. -iSize   ){
@@ -165,6 +181,6 @@ void main(){
 
 
   //gl_FragColor = vec4( og.xyz + sin( timer ) * 1.* vec3( vUv.x , vUv.y , 0. ), 1.  );
-  gl_FragColor = vec4( p , life );
+  gl_FragColor = vec4( clamp( vec3( -10. ) , vec3( 10. ) ,  p ), life );
 
 }
