@@ -29,20 +29,7 @@ function Cloth( title , mesh , extraParams ){
       vs = shaders.setValue( vs , 'ISIZE' , iSize+"" );
   var dir =new THREE.Vector3( 0. , 0 , -.1 )
 
-  //var flagTexture = THREE.ImageUtils.loadTexture( 'img/logoFlagSquare.png' );
-  //var normalTexture = THREE.ImageUtils.loadTexture( 'img/normals/water.png' );
-  var normalTexture = THREE.ImageUtils.loadTexture( 'img/normals/moss_normal_map.jpg' );
- // var flagTexture = THREE.ImageUtils.loadTexture( 'img/nvsText.png' );
- //
-  //var flagTexture = THREE.ImageUtils.loadTexture( 'img/aley.png' );
-  var flagTexture = THREE.ImageUtils.loadTexture( 'img/aHex3.png' );
-  flagTexture.filter = THREE.Nearest;
-  var iriTexture = THREE.ImageUtils.loadTexture( 'img/iri/orangeTurq.png' );
-  //dir.normalize();
-  
-  normalTexture.wrapS = THREE.RepeatWrapping;
-  normalTexture.wrapT = THREE.RepeatWrapping;
-
+ 
   var params =  {
 
     vs: vs,
