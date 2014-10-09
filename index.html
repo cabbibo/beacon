@@ -142,8 +142,8 @@
     camera = new THREE.PerspectiveCamera( 
       50 ,
       window.innerWidth / window.innerHeight,
-      1,
-      1000
+      .1,
+      100
     );
 
     // placing our camera position so it can see everything
@@ -173,7 +173,7 @@
     controls = new THREE.TrackballControls( camera , renderer.domElement);
 
     controls.minDistance = 1;
-    controls.maxDistance = 3000;
+    controls.maxDistance = 60;
 
     // Making sure our renderer is always the right size
     window.addEventListener( 'resize', onWindowResize , false );
@@ -185,7 +185,7 @@
 
     cloth = new Cloth();
     cloth.toggle();
-    cloth.debug();
+   // cloth.debug();
 
 /*
     var g = new THREE.IcosahedronGeometry( 1 , 3 );
