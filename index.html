@@ -11,24 +11,31 @@
   <meta name="twitter:title" content="In Space Puppy We Trust">
   <meta name="twitter:description" content="In Space Puppy We Trust">
   <meta name="twitter:creator" content="@cabbibo">
-  <meta name="twitter:image" content="http://cabbi.bo/image.png">
+  <meta name="twitter:image" content="img/ss.png">
   <meta name="twitter:image:width" content="1440">
   <meta name="twitter:image:height" content="900">
   <meta name="twitter:domain" content="cabbi.bo">
   <meta itemprop="name" content="Cabbi.bo">
   <meta itemprop="description" content="Long Live Synesthesia">
-  <meta itemprop="image" src="http://cabbi.bo/image.png">
+  <meta itemprop="image" src="img/ss.png">
   <meta property="og:title" content="Cabbi.bo">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="http://cabbi.bo/image.png"/>
+  <meta property="og:image" content="img/ss.png"/>
   <meta property="og:site_name" content="Cabbi.bo">
   <meta property="og:description" content="In Space Puppy We Trust">
 
 </head>
 <body>
 
-  <div id="GUI">
+  <div id="GUI"></div>
+
+  <div id="description">
+
+    <a href="https://twitter.com/jamesblake" target="_blank"> James Blake - Lindesfarne II </a>
+
   </div>
+
+
   
 <script src = "lib/underscore.js"           ></script>
 <script src = "lib/three.js"                ></script>
@@ -65,7 +72,7 @@
 
   // TODO: make into loader
   var loaded = 0;
-  var neededToLoad = 2;
+  var neededToLoad = 1;
 
   var shaders;
 
@@ -81,15 +88,15 @@
   var clock = new THREE.Clock();
 
   var audioController = new AudioController();
-  audioController.mute.gain.value = 0;
-  //var stream = new Stream(  'audio/huldra.mp3',audioController  );
+ // audioController.mute.gain.value = 0;
+  var stream = new Stream(  'audio/beacon.mp3',audioController  );
 
- var userAudio = new UserAudio( audioController );
+ /*var userAudio = new UserAudio( audioController );
   userAudio.onStreamCreated = function(){
 
     onLoad();
 
-  }
+  }*/
 
   var G_UNIFORMS = {
 
@@ -245,7 +252,7 @@
 
       init();
       animate();
-      //if( stream ) stream.play();
+      if( stream ) stream.play();
 
     }
 

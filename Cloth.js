@@ -1,7 +1,7 @@
 function Cloth( title , mesh , extraParams ){
 
-  var title = title || 'HELLO';
-  var mesh = mesh || new THREE.Mesh( new THREE.PlaneGeometry( 10, 10 , 200 , 200) );
+  var title = title || 'Beacon';
+  var mesh = mesh || new THREE.Mesh( new THREE.PlaneGeometry( 10, 10 , 256 , 256) );
 
   var geometry = new THREE.Geometry();
 
@@ -62,7 +62,7 @@ function Cloth( title , mesh , extraParams ){
       windHeight:     { type:"f" , value: .8  , constraints:[ 0 , 1] },
       windDirection:      { type:"v3" ,value: dir  },
       dampening:          { type:"f" , value: .9  , constraints:[ .8 , .9999 ] },
-      springLength:       { type:"f" , value: .05  , constraints:[ .01 ,.1 ] },
+      springLength:       { type:"f" , value: 10 / 256  , constraints:[ .01 ,.1 ] },
       springMultiplier:   { type:"f" , value: 10000. , constraints:[ 1000 ,10000 ] },
       returnMultiplier:   { type:"f" , value: 1000. , constraints:[ .001 ,2000 ] },
 

@@ -108,7 +108,14 @@ void main(){
   //vec4 flag = texture2D( t_flag , vUv );
  // gl_FragColor =vec4( vec3(1.), 1. ) * lu * lu * lu; //* vec4(vUv.x , .1 , vUv.y , 1. );//c + aC;// c * aC * custom3;
   //gl_FragColor = aC * vec4( iri + vec3( 1.-flag.r), 1. ) * (1. - lu * lu * lu ); //* vec4(vUv.x , .1 , vUv.y , 1. );//c + aC;// c * aC * custom3;
-  gl_FragColor = aC * vec4( iri* (abs(vMNorm)+vec3(.7)) + vec3( 1.-flag.r), 1. ) * (1. - lu * lu * lu ); //* vec4(vUv.x , .1 , vUv.y , 1. );//c + aC;// c * aC * custom3;
+  gl_FragColor = aC * vec4( iri* (abs(vMNorm)+vec3(.7)) + vec3( 1.-flag.r), 1. ) * (1. - lu * lu * lu );
+  
+  
+  //gl_FragColor = vec4( 1. );
+  
+  
+  
+  //* vec4(vUv.x , .1 , vUv.y , 1. );//c + aC;// c * aC * custom3;
  // gl_FragColor = vec4( iri* (abs(vMNorm)+vec3(.7)) + vec3( 1.-flag.r), 1. ) * (1. - lu * lu * lu ); //* vec4(vUv.x , .1 , vUv.y , 1. );//c + aC;// c * aC * custom3;
 
  // gl_FragColor = vec4( flag.xyz , 1. )* (1. - lu * lu * lu );
