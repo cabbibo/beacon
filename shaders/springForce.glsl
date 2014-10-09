@@ -11,10 +11,21 @@ vec3 springForce( vec3 p1 , vec3 p2 , float l ){
 vec3 springForce( vec3 p1 , vec3 p2 , float l , float p ){
 
   vec3 dif = p1 - p2;
+
   float dL = l - length( dif );
 
-  float s = dL / abs( dL );
+  vec3 r = vec3( 0. );
 
-  return  normalize( dif ) * pow( abs( dL ) , p ) * s;
+  if( dL < .001 || length( dif ) < .001){
+
+  }else{
+
+    float s = dL / abs( dL );
+
+    r = normalize( dif ) * pow( abs( dL ) , p ) * s;
+  
+  }
+
+  return r;
 
 }
