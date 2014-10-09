@@ -35,7 +35,8 @@ function Cloth( title , mesh , extraParams ){
  // var flagTexture = THREE.ImageUtils.loadTexture( 'img/nvsText.png' );
  //
   //var flagTexture = THREE.ImageUtils.loadTexture( 'img/aley.png' );
-  var flagTexture = THREE.ImageUtils.loadTexture( 'img/nyan_250.png' );
+  var flagTexture = THREE.ImageUtils.loadTexture( 'img/aHex3.png' );
+  flagTexture.filter = THREE.Nearest;
   var iriTexture = THREE.ImageUtils.loadTexture( 'img/iri/orangeTurq.png' );
   //dir.normalize();
   
@@ -56,16 +57,18 @@ function Cloth( title , mesh , extraParams ){
 
     soul:{
       
-      windSpeed:     { type:"f" , value: .06  , constraints:[ 0 , 2.1] },
-      windDepth:     { type:"f" , value: .3  , constraints:[ 0 , 1] },
-      windHeight:     { type:"f" , value: .3  , constraints:[ 0 , 1] },
+      windSpeed:     { type:"f" , value: .06  , constraints:[ 0 , .3] },
+      windDepth:     { type:"f" , value: .4  , constraints:[ 0 , 1] },
+      windHeight:     { type:"f" , value: .8  , constraints:[ 0 , 1] },
       windDirection:      { type:"v3" ,value: dir  },
-      dampening:          { type:"f" , value: .9  , constraints:[ .0 , .9999 ] },
-      springLength:       { type:"f" , value: .05  , constraints:[ .0001 ,.1 ] },
-      springMultiplier:   { type:"f" , value: 10000. , constraints:[ .001 ,10000 ] },
-      returnMultiplier:   { type:"f" , value: 10. , constraints:[ .001 ,20 ] },
-      maxVel:             { type:"f" , value: .001   , constraints:[ .00001 , .01 ] },
-      noiseSize:          { type:"f" , value: .3   , constraints:[ .00001 , 1. ] },
+      dampening:          { type:"f" , value: .9  , constraints:[ .8 , .9999 ] },
+      springLength:       { type:"f" , value: .05  , constraints:[ .01 ,.1 ] },
+      springMultiplier:   { type:"f" , value: 10000. , constraints:[ 1000 ,10000 ] },
+      returnMultiplier:   { type:"f" , value: 1000. , constraints:[ .001 ,2000 ] },
+
+      maxVel:             { type:"f" , value: .001   , constraints:[ .00001 , .002 ] },
+      noiseSize:          { type:"f" , value: .3   , constraints:[ .001 , 1. ] },
+
       sample:             G_UNIFORMS.sample,
       time:               G_UNIFORMS.time,
       t_flag: { type:"t" , value: flagTexture }, 
@@ -78,12 +81,13 @@ function Cloth( title , mesh , extraParams ){
           
       t_audio:            G_UNIFORMS.t_audio,
       lightPos:{type:"v3" , value: new THREE.Vector3( 10 , 1 , 1 )},
-      audioDisplacement: { type:"f" , value: 0   , constraints:[ 0 , .3 ] },
-      texScale: { type:"f" , value: 10   , constraints:[ 0 , 100 ] },
-      normalScale: { type:"f" , value: 0.4   , constraints:[ 0 , 3. ] },
+      audioDisplacement: { type:"f" , value: 0   , constraints:[ 0 , .1 ] },
+      texScale: { type:"f" , value: 10   , constraints:[ 0 , 10 ] },
+
+      normalScale: { type:"f" , value: 0.4   , constraints:[ 0 , 1. ] },
       t_flag: { type:"t" , value: flagTexture }, 
       t_normal: { type:"t" , value: normalTexture }, 
-      t_iri: { type:"t" , value: iriTexture } 
+      t_iri: { type:"t" , value: iriTexture }, 
     },
 
   }

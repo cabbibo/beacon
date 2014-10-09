@@ -118,7 +118,9 @@
     );
 
     // placing our camera position so it can see everything
-    camera.position.z = 20;
+    camera.position.z = 6;
+    camera.position.x = -6;
+    camera.position.y = -.5;
     camera.lookAt( new THREE.Vector3() );
 
     // Getting the container in the right location
@@ -188,7 +190,7 @@
 
   function animate(){
 
-    for( var i = 0; i < 5; i++ ){
+    for( var i = 0; i < 3; i++ ){
       
       G_UNIFORMS.dT.value = clock.getDelta();
       G_UNIFORMS.time.value += G_UNIFORMS.dT.value;
